@@ -1,0 +1,21 @@
+{
+  "ALL_MODELS": [
+    {
+      "conf_file": "detect_base.yaml",
+      "data_file": "detect_sample.dat",
+      "log_file": "castor.log",
+      "model_file": "model",
+      "model_size": 500
+    }
+  ],
+  "DEL_MODEL": [
+    {
+      "conf_file": "detect_base.yaml",
+      "data_file": "detect_multi_tag_sample.dat",
+      "log_file": "castor.log",
+      "model_file": "model",
+      "model_size": 500
+    }
+  ]
+}
+
