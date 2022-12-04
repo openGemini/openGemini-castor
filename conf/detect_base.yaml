@@ -1,0 +1,138 @@
+# parameters for data validate
+Data_Validate:
+
+  # the maximum of rate of the missing value. default: 0.5
+  miss_max_rate: 0.9
+
+# parameters for data preprocess
+Data_Preprocess:
+
+  # the resample interval, in minutes. default: "asitis"
+  interval: "asitis"
+
+  # extreme value removal
+  # the low quantile. default: 0.001.
+  p1: 0
+  # the high quantile. default: 0.999
+  p2: 1
+
+  # smooth process
+  # the smooth window. default: 1
+  window: 1
+  # the agg function. default: "median"
+  agg: median
+
+
+# parameters for anomaly suppression
+# Configurable in detection
+Anomaly_Suppress:
+  # suppressor for common anomaly detector
+  common:
+    LowerBoundSuppressor:
+      upper_bound: 15
+      lower_bound: 1
+
+    VariationRatioSuppressor:
+      threshold: 0.1
+      history_length: 50
+
+    TransientAnomalySuppressor:
+      window: 5
+      anomalies: 2
+
+    ContinuousAnomalySuppressor:
+      gap: "10T"
+
+  # suppressor for ThresholdAD anomaly detector
+  ThresholdAD:
+    TransientAnomalySuppressor:
+      window: 5
+      anomalies: 2
+
+    ContinuousAnomalySuppressor:
+      gap: "30T"
+
+  # suppressor for IncrementalAD anomaly detector
+  IncrementalAD:
+    VariationRatioSuppressor:
+      threshold: 0.1
+      history_length: 50
+
+    TransientAnomalySuppressor:
+      window: 5
+      anomalies: 2
+
+    ContinuousAnomalySuppressor:
+      gap: "10T"
+
+  # suppressor for ValueChangeAD anomaly detector
+  ValueChangeAD:
+    ContinuousAnomalySuppressor:
+      gap: "2T"
+
+# parameters for DIFFERENTIATEAD anomaly detector
+DIFFERENTIATEAD:
+  # algorithm name
+  algo: DIFFERENTIATEAD
+  # window of computing difference
+  window: 9
+
+  DYNAMIC_THRESHOLD:
+    # the string used to choose Thresholder
+    CHOICE: 'SigewmThresholder'
+    SigewmThresholder:
+      # computing data window
+      window: 100
+      # factor used to determine the bound of normal range
+      sigma: 3
+
+# parameters for BatchDIFFERENTIATEAD anomaly detector
+BatchDIFFERENTIATEAD:
+  # algorithm name
+  algo: BatchDIFFERENTIATEAD
+  # window of computing difference
+  window: 9
+
+  DYNAMIC_THRESHOLD:
+    # the string used to choose Thresholder
+    CHOICE: 'SigmaThresholder'
+    SigmaThresholder:
+      # factor used to determine the bound of normal range
+      sigma: 3
+
+# parameters for ThresholdAD anomaly detector
+ThresholdAD:
+  # upper threshold
+  upper_bound: 70
+  # lower threshold
+  lower_bound: 0
+  # computing data window
+  window: 0
+
+# parameters for IncrementalAD anomaly detector
+IncrementalAD:
+  # the size of divided data window
+  window_size: 5
+  # the number of divided data window
+  window_number: 4
+  # upper threshold for data increase scenarios. If data value is not bigger than upper_bound, the data will not a anomaly
+  upper_bound: 1
+  # lower threshold for data decrease scenarios. If data value is not smaller than lower_bound, the data will not a anomaly
+  lower_bound: 0
+
+# parameters for ValueChangeAD anomaly detector
+ValueChangeAD:
+    window: 1
+
+# parameters for SeverityLevelCombiner
+Severity_Level:
+  # parameters for SeverityLevelByAlgo
+  algo:
+    ThresholdAD: 1
+    Incremental: 0.85
+    DIFFERENTIATEAD: 0
+    ValueChangeAD: 1
+  # parameters for SeverityLevelByHistoryAnomaly
+  his_anomaly:
+    # historical time gap
+    gap: "2D"
