@@ -1,7 +1,10 @@
-# Castor：时序数据分析Python库
+# openGemini-castor：时序数据分析Python库
+![License](https://img.shields.io/badge/license-Apache2.0-green) 
 
-## 关于 Castor
-Castor是一个时序数据分析Python库。它提供了一个端到端的时序分析框架，可用于智能运维、物联网等场景，具备高效的实时数据分析和灵活的算法编排能力。
+[简体中文]() | [English](README.md)
+
+## 关于 openGemini-castor
+openGemini-castor 是一个时序数据分析Python库。它提供了一个端到端的时序分析框架，可用于智能运维、物联网等场景，具备高效的实时数据分析和灵活的算法编排能力。
 
 主要特性：
 * 高性能分析：每秒万级实时指标数据并发检测。
@@ -22,7 +25,7 @@ Python版本要求：3.9.1
 ```
 
 ## 快速开始
-为了帮助开发者快速使用Castor，本章节提供了使用DFFIENTIATEAD和ThresholdAD算法检测异常的例子。
+为了帮助开发者快速使用openGemini-castor，本章节提供了使用 "DFFIENTIATEAD" 和 "ThresholdAD" 算法检测异常的例子。
 
 #### 准备检测数据和参数
 首先我们需要准备检测数据以及配置参数。其中，参数可以通过加载默认配置文件来获取。
@@ -35,12 +38,13 @@ params = load_params_from_yaml(config_file="./conf/detect_base.yaml")
 
 #### 检测时序数据异常
 
-指定DIFFERENTIATEAD和ThresholdAD检测器后，初始化模型并进行检测。
+指定 "DIFFERENTIATEAD" 和 "ThresholdAD" 检测器后，初始化模型并进行检测。
 
 ```python
 from castor.detector.pipeline_detector import PipelineDetector
 from adtk.visualization import plot
 from castor.utils import const as con
+import matplotlib.pyplot as plt
 algo_list = ["DIFFERENTIATEAD", "ThresholdAD"]
 pipeline_detector = PipelineDetector(algo_list, params)
 results = pipeline_detector.run(data)
@@ -48,12 +52,13 @@ for algo, anomalies in zip(algo_list, results):
     labels = anomalies.get(con.LABEL)
     ax = plot(data, anomaly=labels, anomaly_color="red")
     ax[0].set_title(algo)
+plt.show()
 ```
 如果在配置参数中将告警抑制器取消（如detect_base_without_suppressor.yaml文件中的配置），那么结果会包含异常检测器所检测到的全部异常：
 <img src="./docs/_figure/DIFFERENTIATEAD_without_suppressor.jpg" />
 <img src="./docs/_figure/ThresholdAD_without_suppressor.jpg" />
 
-如果完整使用默认配置文件，Castor会根据配置参数所指定告警抑制器进行告警抑制，即部分异常会从结果中剔除，减少误报和重复报警：
+如果完整使用默认配置文件，openGemini-castor 会根据配置参数所指定告警抑制器进行告警抑制，即部分异常会从结果中剔除，减少误报和重复报警：
 <img src="./docs/_figure/DIFFERENTIATEAD.jpg" />
 <img src="./docs/_figure/ThresholdAD.jpg" />
 
@@ -62,7 +67,7 @@ for algo, anomalies in zip(algo_list, results):
 [Tips for Contribution](https://github.com/openGemini/openGemini/blob/main/CONTRIBUTION_CN.md)
 
 ## License
-Castor 采用 Apache 2.0 license. 详细见 [LICENSE](https://github.com/openGemini/openGemini-castor/blob/main/LICENSE).
+openGemini-castor 采用 Apache 2.0 license. 详细见 [LICENSE](https://github.com/openGemini/openGemini-castor/blob/main/LICENSE).
 
 
 
