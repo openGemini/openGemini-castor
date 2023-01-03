@@ -14,6 +14,7 @@ openGemini-castor 是一个时序数据分析Python库。它提供了一个端�
 * 严重程度分级：根据多种异常出现情况，按严重程度对异常进行分类。辅助开发者对故障严重程度的判断。
 * 灵活的算法编排：可通过配置参数灵活地制定检测流程。其中，异常检测器、告警抑制器和严重程度分级器都可以根据不同的需求进行配置。
 
+了解更多详细信息，可参考[openGemini-castor使用指南](https://github.com/openGemini/community/blob/main/openGemini-castor_user_manual.md)
 ## 安装
 Python版本要求：3.9.1
 
