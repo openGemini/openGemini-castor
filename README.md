@@ -13,6 +13,8 @@ Features：
 * Alarm suppression: For different scenarios, TransientAnomalySuppressor, ContinuousAnomalySuppressor, LowerBoundSuppressor, VariationRatioSuppressor can be used in combination, to suppress false and duplicate alarms.
 * Severity-level classification: Anomalies will be classified in terms of severity according to their various occurrence pattern. It provides guidance for developers determine the fault severity.
 * Flexible algorithm combination: The detection process can be flexibly configured through configuration parameters. In detection process, anomaly detectors, alarm suppressors and severity-level classifiers can be freely chosen and configured according to requirements through configuration parameters.
+
+For more information, please see [openGemini castor user manual](https://github.com/openGemini/community/blob/main/openGemini-castor_user_manual.md)
 ## Installation
 Python version requirement: 3.9.1
 
